@@ -44,6 +44,22 @@ exports.getBookController = async (req, res) => {
   }
 };
 
+exports.filterController=async(req,res)=>{
+  try {
+    let data=await Book.find(req.query)
+    res.send({
+      msg: "Data Filtered",
+      data,
+      success: res.statusCode,
+    })
+  } catch (error) {
+    res.send({
+      msg: error.msg,
+      success: res.statuscode,
+    });
+  }
+}
+
 exports.findBookController = async (req, res) => {
   let { name } = req.query;
   console.log(req.query);
