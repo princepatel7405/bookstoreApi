@@ -13,7 +13,7 @@ exports.addBookController = async (req, res) => {
       });
     } else {
       let data = new Book(payload);
-      await data.save();
+      await data.save();    
       res.send({
         msg: "Data added successfully",
         data,
@@ -61,3 +61,20 @@ exports.findBookController = async (req, res) => {
     });
   }
 };
+
+exports.singleBookController=async(req,res)=>{
+  let {id}=req.params;
+  try {
+    let data = await Book.findById(id);
+    res.send({
+      msg: "Data Found",
+      data,
+      success: res.statusCode,
+    });
+  } catch (error) {
+    res.send({
+      msg: error.msg,
+      success: res.statuscode,
+    });
+  }
+}
